@@ -37,7 +37,7 @@ func main() {
 func rootHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s\t %s\t %s\n", r.Method, r.RequestURI, r.RemoteAddr)
-		if _, err := w.Write([]byte("Sirius kube-itog project")); err != nil {
+		if _, err := w.Write([]byte("itog project")); err != nil {
 			log.Println(err)
 		}
 	}

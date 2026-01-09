@@ -37,7 +37,7 @@ func main() {
 func loginHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s\t %s\t %s\n", r.Method, r.RequestURI, r.RemoteAddr)
-		if _, err := w.Write([]byte("Login Service")); err != nil {
+		if _, err := w.Write([]byte("login Service")); err != nil {
 			log.Println(err)
 		}
 	}

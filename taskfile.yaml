@@ -1,0 +1,33 @@
+version: "3"
+
+dotenv:
+  - .env
+
+  build:
+    cmds:
+      - docker build -f ./cmd/api-service/Dockerfile -t bessjxx/api-app:latest .
+      - docker build -f ./cmd/info-service/Dockerfile -t bessjxx/info-app:latest .
+      - docker build -f ./cmd/login-service/Dockerfile -t bessjxx/login-app:latest .
+      - docker build -f ./cmd/root-service/Dockerfile -t bessjxx/root-app:latest .
+
+  
+  push:
+    cmds:
+      - docker push bessjxx/api-app:latest 
+      - docker push bessjxx/info-app:latest 
+      - docker push bessjxx/login-app:latest 
+      - docker push bessjxx/root-app:latest 
+
+  deploy:
+    cmds:
+      - kubectl apply -n bessjxx -f ./deployments/k8s/api/
+      - kubectl apply -n bessjxx -f ./deployments/k8s/info/
+      - kubectl apply -n bessjxx -f ./deployments/k8s/login/
+      - kubectl apply -n bessjxx -f ./deployments/k8s/root/
+      - kubectl apply -n bessjxx -f ./deployments/k8s/ingress.yaml
+
+  release:
+    cmds:
+      # - task: compile
+      - task: build
+      - task: deploy
